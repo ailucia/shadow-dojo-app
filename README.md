@@ -1,15 +1,11 @@
-# Shadow Dojo
+# AI Product Shadow Dojo
 
-A training game for an AI product manager job search, coached by an AI agent that runs in your
-own coding tool.
+I built Shadow Dojo to have fun and stay motivated during my own AI product manager job search. A training game for an AI PM job search with an AI sensei that runs in an AI coding assistant of your choice. This is a public copy of my private repo. 
+- **The sensei handles the admin.** It reads your calendar, inbox and follow-ups, then works with you to build each day's training around what's on your plate.
+- **Practice levels you up.** Each completed rep earns XP. As you rank up, your ninja's outfit and weapons upgrade.
+- **Skills cover the whole search.** Find postings (`/patrol`), judge them (`/scout`), practice answers (`/spar`), plan the day (`/kata`), review the week (`/reflect`).
 
-I built Shadow Dojo to run my own AI PM job search like a training program:
-- **An AI sensei tailors the plan.** It decides each day's practice with you, then runs mocks
-  and debriefs.
-- **Practice levels you up.** Each completed rep earns XP, and the dojo upgrades visually as
-  you climb.
-- **The tedious parts are automated:** finding postings, judging them, tailoring a resume, and
-  finding someone to refer you.
+Mock screenshots below
 
 ![The dojo: today's reps, the campaign strip with your gates, and your ki](docs/screenshots/dojo.png)
 
@@ -48,11 +44,11 @@ sensei is any AI coding agent (Claude Code, Codex, Cursor) opened in this folder
 | `/initiate` | First session | Checks your setup, interviews you, and builds your campaign's gates from your strategy |
 | `/kata` | Plans today | Reads your calendar, inbox and pipeline, asks what today should hold, then writes an ordered day with a tiny first step |
 | `/reflect` | Weekly retro | What worked, what didn't, what changes next week, then the gate call: pass, stay, or re-plan |
-| `/spar` | Works one answer | As a coach, section by section, or as a realistic interviewer, graded against the [rubrics](rubrics/) |
+| `/spar` | Works one answer | As a coach, section by section, or as a realistic interviewer, graded against the [rubrics](rubrics/) created from Product Manager interview courses |
 | `/scout` | Judges a role | Checks facts live, reads recent Glassdoor and Blind reviews in your browser, weighs fit, desire and odds, and makes a rep-or-target call. Dream companies go on your dream list |
 | `/patrol` | Finds postings | Searches LinkedIn, screens against your dealbreakers, and stages every posting in Notion with a first call. Can run daily in the cloud |
-| `/harvest` | Learns from your review | Answers your comments on patrol's picks, tunes its filters (checking past calls still hold), and moves the keepers into your pipeline |
-| `/forge` | Aims your resume | Decides whether to send a resume version as is, tweak it, or start a new angle; writes a plan for you to approve; and verifies a one-page PDF |
+| `/harvest` | Evals for Patrol | Answers your comments on patrol's picks, tunes its filters for Patrol (checking past calls still hold), and moves the keepers into your pipeline |
+| `/forge` | Aims your resume | Draft multiple master resumes; Decides whether to send a resume version as is, tweak it, or start a new master; writes a plan for you to approve; and verifies a one-page PDF |
 | `/referral` | Finds a warm path | Scans LinkedIn for people you know or near the hiring team, picks the ask, and drafts a note you send yourself |
 | `/applied` | Logs an application | Updates the pipeline and your dream-list counters |
 
