@@ -85,7 +85,7 @@ submits an application for you.
    npm run dev
    ```
 
-2. **Set up the app** (three screens): your name, linking the save file, and waking your sensei.
+2. **Set up the app** (three screens): your name, linking the save file, and meeting your sensei.
    Linking needs Chrome or Edge; in other browsers, use Export and Import instead. Save the file
    in this project's `my/` folder.
 3. **Turn on connectors in your AI agent:**
@@ -94,7 +94,12 @@ submits an application for you.
      without it.
    - **Gmail:** so `/kata` sees recruiter replies and interview invites. Read-only.
    - **Claude in Chrome:** so `/scout` and `/referral` can read pages you're logged into.
-4. **Open this folder in your agent and run `/initiate`.** Then click **Sync sensei** in the app.
+4. **Open this folder in your agent and start your first session,** one of two ways:
+   - **Claude Code:** type `/initiate`.
+   - **Any other agent (Codex, Cursor…):** paste the prompt from the app's third setup screen,
+     or just say "Read AGENTS.md, then run prompts/initiate.md with me."
+
+   Then click **Sync sensei** in the app.
 
 Optional tools: [Typst](https://typst.app) for `/forge`, and Bun (or Node's `npx tsx`) for
 `/patrol`.

@@ -252,18 +252,83 @@ textarea.field { resize: vertical; min-height: 3.2rem; }
   z-index: 80;
   display: grid;
   place-items: center;
-  background: radial-gradient(circle at center, rgba(255, 106, 61, 0.18), rgba(18, 12, 12, 0.92) 60%);
+  padding: 1.25rem;
+  overflow-y: auto;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 106, 61, 0.08),
+    rgba(12, 8, 8, 0.9) 58%,
+    rgba(12, 8, 8, 0.96)
+  );
   animation: fadeIn 0.3s ease;
 }
-.fanfare-card { text-align: center; animation: popIn 0.6s cubic-bezier(0.16, 1, 0.3, 1); position: relative; }
+.fanfare-card {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 34rem);
+  max-height: calc(100dvh - 2.5rem);
+  overflow-y: auto;
+  padding: clamp(1.5rem, 5vw, 2.75rem);
+  text-align: center;
+  background: linear-gradient(180deg, rgba(37, 23, 21, 0.99), rgba(21, 14, 14, 0.99));
+  border: 1px solid rgba(255, 206, 74, 0.3);
+  border-radius: 24px;
+  box-shadow: 0 24px 90px rgba(0, 0, 0, 0.72), 0 0 42px rgba(255, 106, 61, 0.12);
+  animation: popIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
 .fanfare-rays {
   position: absolute;
+  z-index: 0;
   width: 130vmax; height: 130vmax;
   left: 50%; top: 50%;
   margin-left: -65vmax; margin-top: -65vmax;
-  background: repeating-conic-gradient(from 0deg, rgba(255, 206, 74, 0.10) 0deg 6deg, transparent 6deg 12deg);
+  background: repeating-conic-gradient(from 0deg, rgba(255, 206, 74, 0.055) 0deg 6deg, transparent 6deg 12deg);
   animation: spin 14s linear infinite;
   pointer-events: none;
+}
+.rank-up-rewards { margin: 1.4rem 0 1.6rem; }
+.rank-up-rewards > .eyebrow { margin-bottom: 0.6rem; text-align: left; }
+.rank-up-ladder {
+  display: grid;
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: left;
+}
+.rank-up-tier {
+  display: grid;
+  grid-template-columns: 6.5rem minmax(0, 1fr);
+  align-items: center;
+  column-gap: 0.75rem;
+  row-gap: 0.2rem;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid rgba(255, 240, 234, 0.1);
+  border-radius: 12px;
+  background: rgba(8, 5, 5, 0.32);
+}
+.rank-up-tier.is-current {
+  border-color: rgba(255, 206, 74, 0.7);
+  background: rgba(255, 206, 74, 0.09);
+  box-shadow: inset 3px 0 0 var(--gold);
+}
+.rank-up-tier-label { display: grid; gap: 0.15rem; }
+.rank-up-tier-name { font-size: 0.9rem; font-weight: 800; }
+.rank-up-tier-xp {
+  color: var(--ink-faint);
+  font-size: 0.63rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.rank-up-tier-reward { color: var(--ink-dim); font-size: 0.78rem; line-height: 1.35; }
+.rank-up-unlocked {
+  grid-column: 2;
+  color: var(--gold);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }

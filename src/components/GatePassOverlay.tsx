@@ -8,9 +8,19 @@ export function GatePassOverlay() {
   const clear = useDojo((s) => s.clearGatePassed)
   if (!gate) return null
   return (
-    <div className="fanfare" onClick={clear}>
+    <div
+      className="fanfare"
+      onClick={(event) => {
+        if (event.target === event.currentTarget) clear()
+      }}
+    >
       <div className="fanfare-rays" />
-      <div className="fanfare-card">
+      <div
+        className="fanfare-card"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="gate-passed-title"
+      >
         <div className="flex justify-center mb-3">
           <svg
             width="120"
@@ -23,7 +33,11 @@ export function GatePassOverlay() {
           </svg>
         </div>
         <div className="eyebrow gold-text">Gate passed</div>
-        <div className="display ki-text" style={{ fontSize: '3rem', margin: '0.4rem 0' }}>
+        <div
+          id="gate-passed-title"
+          className="display ki-text-bright"
+          style={{ fontSize: '3rem', margin: '0.4rem 0' }}
+        >
           Gate {gate.gateNumber} of {gate.total}
         </div>
         <p style={{ color: 'var(--ink-dim)', maxWidth: 380, margin: '0 auto 1.2rem' }}>

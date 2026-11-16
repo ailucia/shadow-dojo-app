@@ -80,17 +80,25 @@ export function Onboarding() {
             <h1 className="display text-3xl mb-2">
               Link your <span className="ki-text">save file</span>.
             </h1>
-            <p className="mb-3" style={{ color: 'var(--ink-dim)' }}>
-              The app keeps your progress inside your browser, where your AI sensei can't see it.
-              Linking keeps a copy in a file in this project's <code>my/</code> folder, updated every
-              time something changes. Your sensei reads that file and writes your daily plan into it,
-              and the app picks the changes up when you come back to this tab.
+            <p className="mb-4" style={{ color: 'var(--ink-dim)' }}>
+              Save it in this project's <code>my/</code> folder, so your sensei can read it.
             </p>
             {canLink ? (
               <>
+                <ol className="text-sm grid gap-2 mb-4" style={{ color: 'var(--ink-dim)', paddingLeft: '1.2rem', listStyle: 'decimal' }}>
+                  <li>
+                    Click <strong>Choose where to save</strong>.
+                  </li>
+                  <li>
+                    In the dialog, open the <code>shadow-dojo-app</code> folder, then the <code>my</code>{' '}
+                    folder inside it.
+                  </li>
+                  <li>
+                    Keep the name <code>shadow-dojo.json</code> and click <strong>Save</strong>.
+                  </li>
+                </ol>
                 <p className="text-sm mb-4" style={{ color: 'var(--ink-faint)' }}>
-                  In the save dialog, open the <code>my/</code> folder inside the shadow-dojo-app
-                  folder and keep the name <code>shadow-dojo.json</code>.
+                  You should end up with <code>shadow-dojo-app/my/shadow-dojo.json</code>.
                 </p>
                 {linkedName ? (
                   <p className="text-sm gold-text">Linked ✓ {linkedName}</p>
@@ -104,6 +112,11 @@ export function Onboarding() {
                     {linkError}
                   </p>
                 )}
+                <p className="text-xs mt-4" style={{ color: 'var(--ink-faint)' }}>
+                  Why: the app keeps your progress inside your browser, where your sensei can't see it.
+                  The linked file stays in sync. Every change you make is saved to it, and anything your
+                  sensei writes there, like today's plan, shows up when you come back to this tab.
+                </p>
               </>
             ) : (
               <p className="text-sm" style={{ color: 'var(--ink-faint)' }}>
@@ -118,27 +131,42 @@ export function Onboarding() {
         {step === 2 && (
           <>
             <h1 className="display text-3xl mb-2">
-              Wake your <span className="ki-text">sensei</span>.
+              Meet your <span className="ki-text">sensei</span>.
             </h1>
             <p className="mb-4" style={{ color: 'var(--ink-dim)' }}>
-              Your coach is an AI agent working in this folder. It sets up your campaign, plans your
-              training, and runs the job-search skills with you.
+              Your sensei is an AI coding agent working in this folder. Open the{' '}
+              <code>shadow-dojo-app</code> folder in your agent, then start your first session one of
+              two ways:
             </p>
-            <ol className="text-sm grid gap-2 mb-4" style={{ color: 'var(--ink-dim)', paddingLeft: '1.2rem', listStyle: 'decimal' }}>
-              <li>Open this project's folder in Claude Code, Codex, or Cursor.</li>
-              <li>
-                Type <code>/initiate</code> in Claude Code, or paste the prompt below in other agents.
-                Your sensei will walk you through setup and interview you.
-              </li>
-              <li>
-                When it's done, click <strong>Sync sensei</strong> in the top bar to pull in your
-                campaign and your first day's plan.
-              </li>
-            </ol>
-            <button className="btn btn-ghost btn-sm" onClick={() => void copyInitiate()}>
-              {copied ? 'Copied ✓' : '📋 Copy the first prompt'}
-            </button>
-            <p className="text-xs mt-3" style={{ color: 'var(--ink-faint)' }}>
+            <div className="panel-raised p-4">
+              <div className="eyebrow mb-2">Option 1 · Claude Code</div>
+              <p className="text-sm" style={{ color: 'var(--ink-dim)' }}>
+                Type <code>/initiate</code> and press Enter.
+              </p>
+            </div>
+            <div className="text-xs text-center my-2" style={{ color: 'var(--ink-faint)' }}>
+              or
+            </div>
+            <div className="panel-raised p-4">
+              <div className="eyebrow mb-2">Option 2 · Any other agent (Codex, Cursor…)</div>
+              <p className="text-sm mb-2" style={{ color: 'var(--ink-dim)' }}>
+                Copy this prompt and paste it into the agent's chat:
+              </p>
+              <p
+                className="text-sm mb-3"
+                style={{ color: 'var(--ink-dim)', background: 'var(--bg-2)', border: '1px solid var(--line)', borderRadius: 10, padding: '0.6rem 0.75rem' }}
+              >
+                {INITIATE_PROMPT}
+              </p>
+              <button className="btn btn-ghost btn-sm" onClick={() => void copyInitiate()}>
+                {copied ? 'Copied ✓' : '📋 Copy the prompt'}
+              </button>
+            </div>
+            <p className="text-sm mt-4" style={{ color: 'var(--ink-dim)' }}>
+              Either way, your sensei walks you through setup and interviews you. When it's done, click{' '}
+              <strong>Sync sensei</strong> in the top bar to pull in your campaign and first day's plan.
+            </p>
+            <p className="text-xs mt-2" style={{ color: 'var(--ink-faint)' }}>
               Until then, the dojo gives you a starter set of reps.
             </p>
           </>
