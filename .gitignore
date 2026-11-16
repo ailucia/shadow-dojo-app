@@ -1,6 +1,7 @@
 # Everything about you lives in my/: save, sensei notes, Notion links, resumes, prep.
-# Git never uploads it.
-my/
+# Git never uploads it. Only my/README.md is tracked, so the folder exists on a fresh clone.
+my/*
+!my/README.md
 # Safety net in case a save lands outside my/
 shadow-dojo.json
 *.bak
