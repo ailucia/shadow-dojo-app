@@ -1,0 +1,458 @@
+@import "tailwindcss";
+
+/* ============================================================
+   SHADOW DOJO — design system
+   Bold, dark, training-montage energy. Excitement on the upside;
+   setbacks stay steadying, never alarming (no harsh reds).
+   ============================================================ */
+
+:root {
+  /* base — Vermilion shrine: warm lantern-lit dark */
+  --bg: #120c0c;
+  --bg-2: #170f0f;
+  --panel: #201414;
+  --panel-2: #2a1a1a;
+  --line: #3a2424;
+  --line-bright: #523232;
+
+  /* ink */
+  --ink: #f8f0ea;
+  --ink-dim: #cdb4ac;
+  --ink-faint: #94807a;
+
+  /* ki — the energy gradient (Focus, primary actions): gold → vermilion → crimson */
+  --ki-1: #ffce4a;
+  --ki-2: #ff6a3d;
+  --ki-3: #d9304f;
+  --ki-grad: linear-gradient(100deg, var(--ki-1), var(--ki-2) 55%, var(--ki-3));
+  --ki-glow: 0 0 18px rgba(255, 106, 61, 0.55), 0 0 42px rgba(217, 48, 79, 0.35);
+
+  /* gold — XP, titles, mastery */
+  --gold: #ffce4a;
+  --gold-dim: #b9912a;
+
+  /* calm accents for steadying/recovery states (never alarm-red) */
+  --calm: #7fa8c9;
+  --calm-dim: #3f5670;
+
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(1200px 700px at 80% -10%, rgba(217, 48, 79, 0.10), transparent 60%),
+    radial-gradient(900px 600px at -10% 110%, rgba(255, 206, 74, 0.07), transparent 55%),
+    var(--bg);
+  color: var(--ink);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ---------- typography ---------- */
+.display {
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  line-height: 1.02;
+}
+.eyebrow {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.ki-text {
+  background: var(--ki-grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+/* Legible variant for large hero numbers on the dark fanfare overlay: the
+   ki gradient's crimson tail drops into the near-black background, so this
+   stops at vermilion (both stops stay bright) and adds a warm glow. */
+.ki-text-bright {
+  background: linear-gradient(100deg, var(--ki-1), var(--ki-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 10px rgba(255, 150, 60, 0.45));
+}
+.gold-text { color: var(--gold); }
+
+/* ---------- surfaces ---------- */
+.panel {
+  background: linear-gradient(180deg, var(--panel), var(--bg-2));
+  border: 1px solid var(--line);
+  border-radius: 18px;
+}
+.panel-raised {
+  background: linear-gradient(180deg, var(--panel-2), var(--panel));
+  border: 1px solid var(--line-bright);
+  border-radius: 16px;
+}
+.hairline { border-color: var(--line); }
+
+/* ---------- buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  border-radius: 12px;
+  padding: 0.6rem 1.05rem;
+  cursor: pointer;
+  border: 1px solid var(--line-bright);
+  background: var(--panel-2);
+  color: var(--ink);
+  transition: transform 0.12s ease, box-shadow 0.18s ease, filter 0.18s ease, background 0.18s ease;
+  user-select: none;
+}
+.btn:hover { transform: translateY(-1px); filter: brightness(1.08); }
+.btn:active { transform: translateY(0) scale(0.98); }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; filter: none; }
+
+.btn-primary {
+  border: none;
+  background: var(--ki-grad);
+  color: #2a0c0c;
+  box-shadow: var(--ki-glow);
+}
+.btn-primary:hover { box-shadow: 0 0 24px rgba(255, 106, 61, 0.7), 0 0 56px rgba(217, 48, 79, 0.45); }
+
+.btn-ghost { background: transparent; border-color: var(--line); color: var(--ink-dim); }
+.btn-sm { padding: 0.38rem 0.7rem; font-size: 0.82rem; border-radius: 10px; }
+
+/* ---------- inputs ---------- */
+.field {
+  width: 100%;
+  background: var(--bg-2);
+  border: 1px solid var(--line-bright);
+  border-radius: 12px;
+  color: var(--ink);
+  padding: 0.7rem 0.9rem;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.field:focus { border-color: var(--ki-2); box-shadow: 0 0 0 3px rgba(255, 106, 61, 0.18); }
+.field::placeholder { color: var(--ink-faint); }
+textarea.field { resize: vertical; min-height: 3.2rem; }
+
+/* ============================================================
+   FOCUS METER (ki) — glows, pulses, surges. Never "shatters".
+   ============================================================ */
+.focus-track {
+  position: relative;
+  height: 22px;
+  border-radius: 999px;
+  background: #170e0e;
+  border: 1px solid var(--line-bright);
+  overflow: hidden;
+  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+}
+.focus-fill {
+  position: absolute;
+  inset: 0;
+  width: var(--focus, 0%);
+  background: var(--ki-grad);
+  background-size: 200% 100%;
+  border-radius: 999px;
+  box-shadow: var(--ki-glow);
+  transition: width 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: kiFlow 3.5s linear infinite, kiBreath 3.2s ease-in-out infinite;
+}
+.focus-fill::after {
+  content: "";
+  position: absolute;
+  top: 0; right: 0; bottom: 0;
+  width: 26px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.85));
+  filter: blur(2px);
+  opacity: 0.7;
+}
+.focus-fill.is-surging { animation: kiFlow 3.5s linear infinite, kiSurge 0.85s ease-out; }
+
+@keyframes kiFlow { to { background-position: 200% 0; } }
+@keyframes kiBreath {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.18); }
+}
+@keyframes kiSurge {
+  0% { filter: brightness(2.2) saturate(1.4); }
+  100% { filter: brightness(1); }
+}
+
+
+/* ---------- training cards ---------- */
+.train-card {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--panel-2), var(--panel));
+  border: 1px solid var(--line-bright);
+  border-radius: 14px;
+  transition: transform 0.14s ease, border-color 0.18s ease, opacity 0.3s ease;
+}
+.train-card:hover { transform: translateX(2px); border-color: var(--ki-2); }
+.train-card.is-done { opacity: 0.5; }
+.train-card.is-done .train-title { text-decoration: line-through; text-decoration-color: var(--ink-faint); }
+/* slash flourish on completion */
+.train-card.just-done::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 40%, rgba(255, 255, 255, 0.9) 50%, transparent 60%);
+  transform: translateX(-120%);
+  animation: slash 0.6s ease-out forwards;
+}
+@keyframes slash { to { transform: translateX(120%); } }
+
+/* ---------- floating "+XP" ---------- */
+.xp-float {
+  position: absolute;
+  font-weight: 800;
+  color: var(--gold);
+  text-shadow: 0 0 10px rgba(255, 206, 74, 0.6);
+  pointer-events: none;
+  animation: floatUp 1s ease-out forwards;
+}
+@keyframes floatUp {
+  0% { opacity: 0; transform: translateY(6px) scale(0.85); }
+  25% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-26px) scale(1.1); }
+}
+
+/* ---------- reward burst ring ---------- */
+.burst-ring {
+  position: fixed;
+  z-index: 60;
+  width: 14px; height: 14px;
+  border-radius: 999px;
+  border: 3px solid var(--ki-2);
+  pointer-events: none;
+  animation: burst 0.7s ease-out forwards;
+}
+@keyframes burst {
+  0% { opacity: 0.9; transform: scale(0.4); box-shadow: var(--ki-glow); }
+  100% { opacity: 0; transform: scale(10); }
+}
+
+/* ---------- rank-up fanfare overlay ---------- */
+.fanfare {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(circle at center, rgba(255, 106, 61, 0.18), rgba(18, 12, 12, 0.92) 60%);
+  animation: fadeIn 0.3s ease;
+}
+.fanfare-card { text-align: center; animation: popIn 0.6s cubic-bezier(0.16, 1, 0.3, 1); position: relative; }
+.fanfare-rays {
+  position: absolute;
+  width: 130vmax; height: 130vmax;
+  left: 50%; top: 50%;
+  margin-left: -65vmax; margin-top: -65vmax;
+  background: repeating-conic-gradient(from 0deg, rgba(255, 206, 74, 0.10) 0deg 6deg, transparent 6deg 12deg);
+  animation: spin 14s linear infinite;
+  pointer-events: none;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes popIn {
+  0% { opacity: 0; transform: scale(0.7); }
+  60% { opacity: 1; transform: scale(1.06); }
+  100% { transform: scale(1); }
+}
+
+/* ---------- the gate kunoichi (stands guard, runs combat kata) ---------- */
+/* She holds her ground at the current gate and cycles through strikes: jab,
+   cross, dodge, weave, slash. Pivots from her feet so leans read as attacks. */
+.gate-ninja-body {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: ninjaCombat 2.8s ease-in-out infinite;
+}
+@keyframes ninjaCombat {
+  0%   { transform: translate(0px, 0px) rotate(0deg) scale(1, 1); }
+  10%  { transform: translate(0px, 1px) rotate(-2deg) scale(1, 1); }
+  18%  { transform: translate(5px, 0px) rotate(7deg) scale(1.05, 1); }
+  26%  { transform: translate(0px, 0px) rotate(0deg) scale(1, 1); }
+  34%  { transform: translate(7px, -1px) rotate(11deg) scale(1.06, 0.99); }
+  42%  { transform: translate(0px, 0px) rotate(0deg) scale(1, 1); }
+  50%  { transform: translate(0px, 2px) rotate(0deg) scale(1.02, 0.9); }
+  58%  { transform: translate(-3px, 0px) rotate(-9deg) scale(1, 1); }
+  66%  { transform: translate(1px, 0px) rotate(13deg) scale(1, 1); }
+  74%  { transform: translate(6px, 0px) rotate(-7deg) scale(1.05, 1); }
+  82%  { transform: translate(0px, 0px) rotate(0deg) scale(1, 1); }
+  90%  { transform: translate(0px, 1px) rotate(2deg) scale(1, 1); }
+  100% { transform: translate(0px, 0px) rotate(0deg) scale(1, 1); }
+}
+.gate-ninja-aura {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: ninjaAura 2.4s ease-in-out infinite;
+}
+@keyframes ninjaAura {
+  0%, 100% { transform: scale(1); opacity: 0.85; }
+  50% { transform: scale(1.18); opacity: 1; }
+}
+.gate-shuriken {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: shurikenSpin 0.9s linear infinite;
+}
+@keyframes shurikenSpin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .gate-ninja, .gate-ninja-body, .gate-ninja-aura, .gate-shuriken {
+    animation: none;
+  }
+}
+
+/* ---------- the finale gate (Week 10) — the prize ---------- */
+.final-gate-glow {
+  animation: finalGateGlow 2.6s ease-in-out infinite;
+}
+@keyframes finalGateGlow {
+  0%, 100% { filter: drop-shadow(0 0 8px rgba(255, 206, 74, 0.5)); }
+  50% { filter: drop-shadow(0 0 22px rgba(255, 206, 74, 0.95)) drop-shadow(0 0 36px rgba(255, 106, 61, 0.5)); }
+}
+.final-rays {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: finalRays 26s linear infinite;
+}
+@keyframes finalRays { to { transform: rotate(360deg); } }
+.final-star {
+  transform-box: fill-box;
+  transform-origin: center;
+  filter: drop-shadow(0 0 4px rgba(255, 206, 74, 0.8));
+  animation: finalStar 2.6s ease-in-out infinite;
+}
+@keyframes finalStar {
+  0%, 100% { transform: scale(1); opacity: 0.9; }
+  50% { transform: scale(1.2); opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .final-gate-glow, .final-rays, .final-star { animation: none; }
+}
+
+/* ---------- campaign gate trail ---------- */
+.chip-boss {
+  color: var(--gold);
+  border-color: var(--gold-dim);
+  background: rgba(255, 206, 74, 0.08);
+}
+
+/* milestone checkboxes (evidence, not homework) */
+.ms-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 4px 0;
+  cursor: pointer;
+  color: var(--ink-dim);
+  font-size: 0.9rem;
+}
+.ms-box {
+  width: 17px;
+  height: 17px;
+  border-radius: 5px;
+  border: 1.5px solid var(--line-bright);
+  display: grid;
+  place-items: center;
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #2a0c0c;
+  flex-shrink: 0;
+  margin-top: 1px;
+  transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.ms-box.is-done {
+  background: var(--gold);
+  border-color: var(--gold);
+  box-shadow: 0 0 8px rgba(255, 206, 74, 0.45);
+}
+button.ms-row:hover .ms-box { border-color: var(--gold); }
+.ms-done-text {
+  text-decoration: line-through;
+  text-decoration-color: var(--ink-faint);
+  opacity: 0.75;
+}
+
+/* ---------- the "strike now" spotlight & day progress ---------- */
+.now-card {
+  border-color: var(--ki-2);
+  box-shadow: 0 0 18px rgba(255, 106, 61, 0.28);
+}
+.day-track {
+  height: 8px;
+  border-radius: 999px;
+  background: #170e0e;
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+.day-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold-dim), var(--gold));
+  border-radius: 999px;
+  transition: width 0.6s ease;
+  box-shadow: 0 0 10px rgba(255, 206, 74, 0.45);
+}
+
+/* ---------- icon bubbles & emblem ---------- */
+.kind-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-size: 1.25rem;
+  background: var(--bg-2);
+  border: 1px solid var(--line-bright);
+  flex-shrink: 0;
+}
+.emblem {
+  width: 64px;
+  height: 64px;
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+  font-size: 2.1rem;
+  background: linear-gradient(180deg, var(--panel-2), var(--bg-2));
+  border: 1px solid var(--line-bright);
+  box-shadow: 0 0 22px rgba(255, 106, 61, 0.18);
+  flex-shrink: 0;
+}
+
+/* ---------- misc ---------- */
+.divider { height: 1px; background: var(--line); }
+.chip {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid var(--line-bright);
+  color: var(--ink-dim);
+}
+.chip-sensei { color: var(--calm); border-color: var(--calm-dim); background: rgba(110, 168, 254, 0.08); }
+.glow-ring { box-shadow: var(--ki-glow); }
+
+.scroll-thin::-webkit-scrollbar { width: 8px; height: 8px; }
+.scroll-thin::-webkit-scrollbar-thumb { background: var(--line-bright); border-radius: 8px; }
+.scroll-thin::-webkit-scrollbar-track { background: transparent; }
+
+a { color: inherit; }

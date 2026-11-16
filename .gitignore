@@ -1,0 +1,34 @@
+# Everything about you lives in my/: save, sensei notes, Notion links, resumes, prep.
+# Git never uploads it.
+my/
+# Safety net in case a save lands outside my/
+shadow-dojo.json
+*.bak
+*.bak.*
+
+# Dependencies and build output
+node_modules
+dist
+dist-ssr
+*.local
+
+# Compiled calendar reader (built on demand by cal.sh)
+scripts/.calbin
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Editors and OS
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.sw?
+
+# Agent settings for this machine
+.claude/settings.local.json
+
+# Scratch
+tmp/
