@@ -9,9 +9,9 @@ Mock screenshots below
 
 ![The dojo: today's reps, the campaign strip with your gates, and your ki](docs/screenshots/dojo.png)
 
-| Setup links your save file | Passing a gate | Ranking up |
-|---|---|---|
-| ![Setup screen 2: link your save file](docs/screenshots/setup-link.png) | ![The gate-passed fanfare](docs/screenshots/gate-passed.png) | ![The rank-up fanfare](docs/screenshots/rank-up.png) |
+| Setup links your save file | Ranking up |
+|---|---|
+| ![Setup screen 2: link your save file](docs/screenshots/setup-link.png) | ![The rank-up fanfare](docs/screenshots/rank-up.png) |
 
 ## How it's organized
 
